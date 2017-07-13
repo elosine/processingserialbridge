@@ -37,12 +37,12 @@ void setup() {
 void draw() {
   // Use an if statement on a serialgate in draw to invoke actions
   //// Device-1, Header-"bt2"
-  if (serialgates[0][2] == 1) {
+ // if (serialgates[0][2] == 1) {
     // Run a function or action here
     // For example: someint = int(serialdatas[0][2]);
     // Or: movesomething();
-    serialgates[0][2] = 0; // Reset gate to 0 to wait for next message
-  }
+ //   serialgates[0][2] = 0; // Reset gate to 0 to wait for next message
+ // }
 } // End draw
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SERIAL EVENT /////////////////////////////////////////////////////////////////////////////////////////
@@ -57,12 +57,18 @@ void serialEvent(Serial serialport) {
     if (serialport == myserials[i]) {
       //Incomming port number
       portnumtmp = i; // Capture the number of serial device in myserials that sent this event
+            println(portnumtmp);
+
     } //end if serialport
   } //end for myserials
   // Read the incomming message
   // Split the message at the ':' to get the header and the data
   String serialmsgtmp = myserials[portnumtmp].readString(); // read the incomming string from the serial port
+ 
   String[] smsgsplittmp = split(serialmsgtmp, ":"); // split the message at the ':'
+    printArray(smsgsplittmp);
+
+  /*
   String headertmp = smsgsplittmp[0]; // incomming header
   String serialdatatmp = smsgsplittmp[1]; // incomming data
   // Check if this header exsists for this device in your list serialheaders
@@ -71,5 +77,5 @@ void serialEvent(Serial serialport) {
       serialgates[portnumtmp][i] = 1; // open the gate so draw can see that a valid serial event is waiting
       serialdatas[portnumtmp][i] = serialdatatmp; //store serial data as a string to be parced appropriately by other functions
     }
-  }
+  }*/
 }
