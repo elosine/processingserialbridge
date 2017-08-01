@@ -159,7 +159,7 @@ void loop() {
 
 
   } //end loop all buttons
-  delay(15);
+  delay(5);
 
 } //end void loop
 
